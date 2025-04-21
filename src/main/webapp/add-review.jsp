@@ -1,0 +1,229 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Review - TastyThreads</title>
+    <link rel="icon" type="image/png" href="templates/images/Tasty Threads.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="templates/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .review-form-section {
+            padding: 4rem 0;
+            background: var(--bg-gradient);
+            min-height: calc(100vh - 80px);
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .rating-input {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+
+        .star-rating label {
+            cursor: pointer;
+            color: #ddd;
+            font-size: 1.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .star-rating input[type="radio"]:checked ~ label {
+            color: #ffd700;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #ffd700;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--medium-gray);
+            color: var(--text-color);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            color: var(--primary-white);
+            background-color: var(--grassy-green);
+        }
+
+        .form-footer {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .btn-back {
+            color: var(--text-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .btn-back:hover {
+            color: var(--primary-color);
+            background-color: var(--purple-mountains);
+        }
+    </style>
+</head>
+<body>
+    <% 
+        if (session == null || session.getAttribute("userId") == null) {
+            response.sendRedirect("login.jsp?message=Please login to leave a review.");
+            return;
+        }
+        String recipeId = request.getParameter("recipeId");
+        if (recipeId == null || recipeId.trim().isEmpty()) {
+            response.sendRedirect("search-recipes.jsp?message=Invalid recipe selected.");
+            return;
+        }
+    %>
+    
+    <header class="header">
+        <div class="header-container">
+            <a href="index.jsp" class="logo"><img src="templates/images/Tasty Threads.png" alt="TastyThreads Logo"></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="view-recipe.jsp" class="active">Recipes</a></li>
+                    <li><a href="about.jsp">About Us</a></li>
+                    <li><a href="profile.jsp">Profile</a></li>
+                    <li><a href="logout.jsp">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="review-form-section">
+            <div class="container">
+                <div class="form-container">
+                    <h2 class="form-title">Add Your Review</h2>
+                    <form id="reviewForm" action="add-review" method="post">
+                        <input type="hidden" name="csrfToken" value="<%= session.getAttribute("csrfToken") %>">
+                        <input type="hidden" name="recipeId" value="<%= recipeId %>">
+                        
+                        <div class="form-group">
+                            <label class="form-label"><i class="fas fa-star"></i> Rating</label>
+                            <div class="star-rating">
+                                <input type="radio" id="star5" name="rating" value="5" required>
+                                <label for="star5" class="fas fa-star"></label>
+                                <input type="radio" id="star4" name="rating" value="4">
+                                <label for="star4" class="fas fa-star"></label>
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3" class="fas fa-star"></label>
+                                <input type="radio" id="star2" name="rating" value="2">
+                                <label for="star2" class="fas fa-star"></label>
+                                <input type="radio" id="star1" name="rating" value="1">
+                                <label for="star1" class="fas fa-star"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comment" class="form-label"><i class="fas fa-comment"></i> Your Review</label>
+                            <textarea id="comment" name="comment" class="form-textarea" 
+                                    maxlength="1000" pattern="[^<>]*"
+                                    placeholder="Share your experience with this recipe..."
+                                    required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i> Submit Review
+                        </button>
+                    </form>
+
+                    <div class="form-footer">
+                        <a href="view-recipe.jsp?recipeId=<%= recipeId %>" class="btn-back">
+                            <i class="fas fa-arrow-left"></i> Back to Recipe
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 TastyThreads. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

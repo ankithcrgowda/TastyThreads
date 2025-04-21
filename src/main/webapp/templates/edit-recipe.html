@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recipe - TastyThreads</title>
+    <link rel="icon" type="image/png" href="images/Tasty Threads.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/edit-recipe.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo"><img src="images/Tasty Threads.png" alt="TastyThreads Logo"></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html" class="active">Recipes</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="contact.html" class="btn-primary">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="edit-recipe-section">
+            <div class="container">
+                <div class="form-container">
+                    <h2 class="form-title">Edit Recipe</h2>
+                    <form id="editRecipeForm" action="#" method="post">
+                        <div class="form-group">
+                            <label for="title" class="form-label"><i class="fas fa-heading"></i> Title</label>
+                            <input type="text" id="title" name="title" class="form-input" 
+                                   required maxlength="100" pattern="[^<>]*">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description" class="form-label"><i class="fas fa-align-left"></i> Description</label>
+                            <textarea id="description" name="description" class="form-textarea" 
+                                    required maxlength="2000"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ingredients" class="form-label"><i class="fas fa-list"></i> Ingredients</label>
+                            <textarea id="ingredients" name="ingredients" class="form-textarea" 
+                                    required maxlength="1000"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cuisine" class="form-label"><i class="fas fa-globe-americas"></i> Cuisine</label>
+                                <input type="text" id="cuisine" name="cuisine" class="form-input" 
+                                       maxlength="50" pattern="[A-Za-z\s,]*">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category" class="form-label"><i class="fas fa-tag"></i> Category</label>
+                                <input type="text" id="category" name="category" class="form-input" 
+                                       maxlength="50" pattern="[A-Za-z\s,]*">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="imageUrl" class="form-label"><i class="fas fa-image"></i> Image URL</label>
+                            <input type="url" id="imageUrl" name="imageUrl" class="form-input" 
+                                   pattern="https?://.+" maxlength="255">
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-save"></i> Update Recipe
+                        </button>
+                        <a href="view-my-recipes.html" class="btn-cancel">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 TastyThreads. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

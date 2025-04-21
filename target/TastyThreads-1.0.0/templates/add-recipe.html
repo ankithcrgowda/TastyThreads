@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe - TastyThreads</title>
+    <link rel="icon" type="image/png" href="images/Tasty Threads.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo"><img src="images/Tasty Threads.png" alt="TastyThreads Logo"></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="contact.html" class="btn-primary">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="add-recipe-section">
+        <div class="container">
+            <div class="form-container">
+                <h2>Add New Recipe</h2>
+                <form id="recipe-form" class="recipe-form">
+                    <div class="form-group">
+                        <label for="recipe-title">Recipe Title*</label>
+                        <input type="text" id="recipe-title" name="title" maxlength="100" required placeholder="Enter recipe title (max 100 characters)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cuisine-type">Cuisine*</label>
+                        <select id="cuisine-type" name="cuisine" required>
+                            <option value="">Select Cuisine</option>
+                            <option value="Indian">Indian</option>
+                            <option value="Italian">Italian</option>
+                            <option value="Chinese">Chinese</option>
+                            <option value="Mexican">Mexican</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Thai">Thai</option>
+                            <option value="Mediterranean">Mediterranean</option>
+                            <option value="American">American</option>
+                            <option value="French">French</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipe-category">Category*</label>
+                        <select id="recipe-category" name="category" required>
+                            <option value="">Select Category</option>
+                            <option value="Breakfast">Breakfast</option>
+                            <option value="Appetizer">Appetizer</option>
+                            <option value="Main Course">Main Course</option>
+                            <option value="Side Dish">Side Dish</option>
+                            <option value="Dessert">Dessert</option>
+                            <option value="Beverage">Beverage</option>
+                            <option value="Snack">Snack</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipe-description">Description*</label>
+                        <textarea id="recipe-description" name="description" rows="3" maxlength="500" required placeholder="Enter recipe description"></textarea>
+                        <span class="character-count"><span id="description-count">0</span>/500 characters</span>
+                    </div>
+
+                    <script>
+                    // Character counter for description
+                    document.getElementById('recipe-description').addEventListener('input', function() {
+                        const maxLength = this.getAttribute('maxlength');
+                        const currentLength = this.value.length;
+                        document.getElementById('description-count').textContent = currentLength;
+                    });
+                    </script>
+
+                    <div class="form-group">
+                        <label for="recipe-image">Recipe Image*</label>
+                        <div class="image-upload-container">
+                            <img id="image-preview" src="#" alt="Preview" style="display: none;">
+                            <label for="recipe-image" class="upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Click to upload image</span>
+                            </label>
+                            <input type="file" id="recipe-image" name="image_url" accept="image/*" required style="display: none;">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ingredients">Ingredients*</label>
+                        <textarea id="ingredients" name="ingredient" rows="4" required placeholder="Enter ingredients (one per line)"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="window.history.back()">Cancel</button>
+                        <button type="submit" class="btn-primary">Submit Recipe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Add ingredient row
+        document.getElementById('add-ingredient').addEventListener('click', () => {
+            const container = document.getElementById('ingredients-container');
+            const newRow = container.children[0].cloneNode(true);
+            newRow.querySelectorAll('input').forEach(input => input.value = '');
+            newRow.querySelector('.remove-ingredient').hidden = false;
+            container.appendChild(newRow);
+        });
+
+        // Add instruction row
+        document.getElementById('add-instruction').addEventListener('click', () => {
+            const container = document.getElementById('instructions-container');
+            const newRow = container.children[0].cloneNode(true);
+            newRow.querySelector('textarea').value = '';
+            newRow.querySelector('textarea').placeholder = `Step ${container.children.length + 1}`;
+            newRow.querySelector('.remove-instruction').hidden = false;
+            container.appendChild(newRow);
+        });
+
+        // Remove row functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.remove-ingredient')) {
+                const row = e.target.closest('.ingredient-row');
+                if (document.querySelectorAll('.ingredient-row').length > 1) {
+                    row.remove();
+                }
+            }
+            if (e.target.closest('.remove-instruction')) {
+                const row = e.target.closest('.instruction-row');
+                if (document.querySelectorAll('.instruction-row').length > 1) {
+                    row.remove();
+                    // Update step numbers
+                    document.querySelectorAll('.instruction-row textarea').forEach((textarea, index) => {
+                        textarea.placeholder = `Step ${index + 1}`;
+                    });
+                }
+            }
+        });
+
+        // Image preview
+        document.getElementById('recipe-image').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('image-preview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Form submission
+        document.getElementById('recipe-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your form submission logic here
+            console.log('Form submitted');
+        });
+    </script>
+</body>
+</html>

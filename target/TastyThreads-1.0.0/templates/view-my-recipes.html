@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Recipes - TastyThreads</title>
+    <link rel="icon" type="image/png" href="images/Tasty Threads.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo"><img src="images/Tasty Threads.png" alt="TastyThreads Logo"></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="contact.html" class="btn-primary">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="my-recipes-section">
+        <div class="container">
+            <h2>My Recipes</h2>
+
+            <div class="recipe-actions" style="margin-bottom: 20px;">
+                <a href="add-recipe.html" class="btn-primary">
+                    <i class="fas fa-plus"></i> Add New Recipe
+                </a>
+            </div>
+
+            <div id="recipes-grid" class="grid">
+                <!-- Recipe cards will be dynamically populated here -->
+            </div>
+
+            <div id="no-recipes" class="alert alert-info" style="display: none;">
+                <i class="fas fa-info-circle"></i> You have not added any recipes yet. Use the button above to add your first recipe!
+            </div>
+
+            <div class="form-footer" style="margin-top: 30px;">
+                <a href="profile.html" class="btn-secondary">
+                    <i class="fas fa-user"></i> Back to Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Function to create a recipe card
+        function createRecipeCard(recipe) {
+            return `
+                <div class="card fade-in">
+                    ${recipe.imageUrl ? `
+                        <div class="recipe-image-container">
+                            <img src="${recipe.imageUrl}" alt="${recipe.title}" class="recipe-image">
+                        </div>
+                    ` : ''}
+                    <div class="card-header">
+                        <h3 class="card-title">${recipe.title}</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="recipe-meta">
+                            <span><i class="fas fa-utensils"></i> ${recipe.cuisine}</span>
+                            <span><i class="fas fa-tag"></i> ${recipe.category}</span>
+                        </div>
+                        
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            ${recipe.avgRating > 0 ? 
+                                `<span class="rating-score">${recipe.avgRating}</span>` : 
+                                '<span>No ratings yet</span>'
+                            }
+                        </div>
+                        
+                        <div class="tags">
+                            <span class="tag">${recipe.category}</span>
+                            <span class="tag">${recipe.cuisine}</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="recipe-actions">
+                            <a href="view-recipe.html?id=${recipe.id}" class="btn btn-sm">
+                                <i class="fas fa-eye"></i> View
+                            </a>
+                            <a href="edit-recipe.html?id=${recipe.id}" class="btn btn-sm">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <button onclick="deleteRecipe(${recipe.id})" class="btn btn-secondary btn-sm">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to load user's recipes
+        async function loadUserRecipes() {
+            try {
+                // TODO: Replace with actual API call
+                const response = await fetch('/api/recipes/my-recipes');
+                const recipes = await response.json();
+                
+                const recipesGrid = document.getElementById('recipes-grid');
+                const noRecipes = document.getElementById('no-recipes');
+                
+                if (recipes.length === 0) {
+                    recipesGrid.style.display = 'none';
+                    noRecipes.style.display = 'block';
+                } else {
+                    recipesGrid.style.display = 'grid';
+                    noRecipes.style.display = 'none';
+                    recipesGrid.innerHTML = recipes.map(recipe => createRecipeCard(recipe)).join('');
+                }
+            } catch (error) {
+                console.error('Error loading recipes:', error);
+                // TODO: Show error message to user
+            }
+        }
+
+        // Function to delete a recipe
+        async function deleteRecipe(recipeId) {
+            if (confirm('Are you sure you want to delete this recipe?')) {
+                try {
+                    // TODO: Replace with actual API call
+                    await fetch(`/api/recipes/${recipeId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    // Reload recipes after deletion
+                    loadUserRecipes();
+                } catch (error) {
+                    console.error('Error deleting recipe:', error);
+                    // TODO: Show error message to user
+                }
+            }
+        }
+
+        // Load recipes when page loads
+        document.addEventListener('DOMContentLoaded', loadUserRecipes);
+    </script>
+</body>
+</html>

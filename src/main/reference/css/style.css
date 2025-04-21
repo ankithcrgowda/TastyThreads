@@ -1,0 +1,456 @@
+/* Main Styles for Recipe Review Application */
+:root {
+  --primary-red: #e53935;
+  --primary-dark-red: #c62828;
+  --primary-white: #ffffff;
+  --light-gray: #f5f5f5;
+  --medium-gray: #e0e0e0;
+  --dark-gray: #757575;
+  --text-color: #333333;
+  --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --accent-yellow: #FFC107;
+  --accent-green: #4CAF50;
+  --accent-blue: #2196F3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--light-gray);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header Styles */
+.header {
+  background-color: var(--primary-white);
+  box-shadow: var(--shadow-light);
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-red);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--primary-red);
+}
+
+/* Form Styles */
+.form-container {
+  background-color: var(--primary-white);
+  border-radius: 16px;
+  box-shadow: var(--shadow-medium);
+  padding: 32px;
+  max-width: 400px;
+  margin: 60px auto;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.form-container:hover {
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-5px);
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border 0.3s, box-shadow 0.3s;
+  background-color: var(--primary-white);
+  margin-bottom: 16px;
+}
+
+.form-input:focus {
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.2);
+  outline: none;
+}
+
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 14px 24px;
+  background-color: #000000;
+  color: var(--primary-white);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 8px;
+}
+
+.btn:hover {
+  background-color: var(--primary-dark-red);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-footer a {
+  color: var(--primary-red);
+  text-decoration: none;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Form Row for side-by-side inputs */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.form-row .form-group {
+  flex: 1;
+  margin: 0 10px 20px;
+  min-width: 200px;
+}
+
+/* Card Styles */
+.card {
+  background-color: var(--primary-white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-light);
+  margin-bottom: 25px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--accent-yellow);
+  color: var(--text-color);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.card-header {
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 20px;
+  color: var(--primary-red);
+  margin: 0;
+  font-weight: 600;
+}
+
+.card-body {
+  padding: 0 20px 20px 20px;
+}
+
+.card-footer {
+  padding: 15px 20px;
+}
+
+/* Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+/* Alert Messages */
+.alert {
+  padding: 12px 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.alert i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Profile Styles */
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+  background-color: var(--medium-gray);
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-name {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.profile-bio {
+  color: var(--dark-gray);
+}
+
+/* Recipe Styles */
+.recipe-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.card:hover .recipe-image {
+  transform: scale(1.05);
+}
+
+.recipe-image-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.recipe-meta {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+  color: var(--dark-gray);
+  font-size: 14px;
+}
+
+.recipe-description {
+  margin-bottom: 20px;
+  color: var(--text-color);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.recipe-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Simplified Rating */
+.rating {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  font-size: 16px;
+}
+
+.rating i {
+  color: var(--accent-yellow);
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.rating-score {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+/* Rating Input */
+.rating-input {
+  position: relative;
+}
+
+.rating-input select {
+  appearance: none;
+  padding-right: 30px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23757575' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.tag {
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+  padding: 5px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tag:hover {
+  background-color: var(--medium-gray);
+  color: var(--text-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .nav-links {
+    margin-top: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .nav-links li {
+    margin: 5px 15px 5px 0;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-container {
+    padding: 20px;
+    margin: 20px auto;
+  }
+  
+  .form-row .form-group {
+    flex: 1 0 100%;
+    margin: 0 0 20px 0;
+  }
+}
+
+/* Search Styles */
+.search-bar {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 4px 0 0 4px;
+  font-size: 16px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.search-input:focus {
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.1);
+  outline: none;
+}
+
+.search-btn {
+  background-color: var(--primary-red);
+  color: var(--primary-white);
+  border: none;
+  border-radius: 0 4px 4px 0;
+  padding: 0 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+  background-color: var(--primary-dark-red);
+}
+
+/* Search Form Styles */
+.search-form {
+  width: 100%;
+}
+
+.section-title {
+  color: var(--primary-red);
+  margin: 30px 0 20px;
+  font-size: 22px;
+}
+
+.search-results {
+  margin-top: 30px;
+}

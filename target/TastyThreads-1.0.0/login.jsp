@@ -1,0 +1,77 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TastyThreads</title>
+    <link rel="icon" type="image/png" href="templates/images/Tasty Threads.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="templates/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="index.jsp" class="logo"><img src="templates/images/Tasty Threads.png" alt="TastyThreads Logo"></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="view-recipe.jsp">Recipes</a></li>
+                    <li><a href="about.jsp">About Us</a></li>
+                    <li><a href="login.jsp" class="active">Login</a></li>
+                    <li><a href="add-recipe.jsp" class="btn-primary">Add Recipe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="login-section">
+            <div class="container">
+                <div class="login-container">
+                    <h2>Welcome Back!</h2>
+                    <p>Sign in to access your recipes and connect with our community</p>
+                    
+                    <% String message = request.getParameter("message");
+                       if (message != null) { %>
+                        <div class="alert alert-error">
+                            <%= message %>
+                        </div>
+                    <% } %>
+                    
+                    <form class="login-form" action="login" method="POST">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <div class="input-group">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="password" name="password" required placeholder="Enter your password">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary btn-full">Sign In</button>
+                    </form>
+                    <div class="signup-prompt">
+                        <p>Don't have an account? <a href="signup.jsp">Sign up</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 TastyThreads. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

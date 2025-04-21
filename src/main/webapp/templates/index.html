@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TastyThreads - Discover Delicious Recipes</title>
+    <link rel="icon" type="image/png" href="images/Tasty Threads.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/carousel.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo"><img src="images/Tasty Threads.png" alt="TastyThreads Logo"></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="view-recipe.html">Recipes</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="add-recipe.html" class="btn-primary">Add Recipe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="carousel">
+                <div class="carousel-slide active" style="background-image: url('images/caroursel_1.jpg')"></div>
+                <div class="carousel-slide" style="background-image: url('images/carousel_2.jpg')"></div>
+                <div class="carousel-slide" style="background-image: url('images/carousel_3.jpg')"></div>
+                <div class="carousel-slide" style="background-image: url('images/carousel_4.jpg')"></div>
+                <div class="carousel-dots">
+                    <div class="carousel-dot active"></div>
+                    <div class="carousel-dot"></div>
+                    <div class="carousel-dot"></div>
+                    <div class="carousel-dot"></div>
+                </div>
+            </div>
+            <div class="container">
+                <h1>Discover & Share Amazing Recipes</h1>
+                <p>Join our community of food lovers and find your next favorite dish</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for recipes...">
+                    <button class="btn-primary"><i class="fas fa-search"></i> Search</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-recipes">
+            <div class="container">
+                <h2>Featured Recipes</h2>
+                <div class="grid">
+                    <div class="card">
+                        <div class="recipe-image-container">
+                            <img src="https://kaveriponnapa.com/wp-content/uploads/2018/11/pandi-curry-close-up-2024-500x500.jpg" alt="Recipe" class="recipe-image">
+                            <div class="card-badge">Top Rated</div>
+                        </div>
+                        <div class="card-body">
+                            <h3>Coorg Pandi Curry</h3>
+                            <div class="recipe-meta">
+                                <span><i class="fas fa-utensils"></i> Indian</span>
+                                <span><i class="fas fa-tag"></i> South Indian</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span class="rating-score">4.8</span>
+                                <span>(124 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- More recipe cards can be added here -->
+                    <div class="card">
+                        <div class="recipe-image-container">
+                            <img src="https://kaveriponnapa.com/wp-content/uploads/2018/11/pandi-curry-close-up-2024-500x500.jpg" alt="Recipe" class="recipe-image">
+                            <div class="card-badge">Top Rated</div>
+                        </div>
+                        <div class="card-body">
+                            <h3>Coorg Pandi Curry</h3>
+                            <div class="recipe-meta">
+                                <span><i class="fas fa-utensils"></i> Indian</span>
+                                <span><i class="fas fa-tag"></i> South Indian</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span class="rating-score">4.8</span>
+                                <span>(124 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="recipe-image-container">
+                            <img src="https://kaveriponnapa.com/wp-content/uploads/2018/11/pandi-curry-close-up-2024-500x500.jpg" alt="Recipe" class="recipe-image">
+                            <div class="card-badge">Top Rated</div>
+                        </div>
+                        <div class="card-body">
+                            <h3>Coorg Pandi Curry</h3>
+                            <div class="recipe-meta">
+                                <span><i class="fas fa-utensils"></i> Indian</span>
+                                <span><i class="fas fa-tag"></i> South Indian</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span class="rating-score">4.8</span>
+                                <span>(124 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 TastyThreads. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
